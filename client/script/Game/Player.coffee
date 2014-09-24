@@ -1,9 +1,9 @@
-class Game.Ball extends Phaser.Sprite
+class Game.Player extends Phaser.Sprite
 
   gameState: null
 
   constructor: (game, gameState, collisionGroup)->
-    super(game, game.world.centerX, game.world.centerY, 'altas_main', 'ball_'+_.random(0,1))
+    super(game, game.world.centerX, game.world.centerY, 'altas_main', 'character_blue_3')
     @anchor.setTo(0.5, 0.5) # this is the default
     @game = game
     @gameState = gameState
