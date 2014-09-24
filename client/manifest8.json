@@ -1,0 +1,35 @@
+{
+  "name": "QuadBall",
+  "xwalk_description": "Maze game",
+  "xwalk_version": "0.1.0.0",
+  "start_url": "index.html",
+  "csp": "script-src 'self'; object-src 'self'",
+  "icons": [
+    {
+      "src": "icon.png",
+      "type": "image/png",
+      "sizes": "128x128"
+    }
+  ],
+  "display": "fullscreen",
+  "orientation": "landscape",
+  "xwalk_permissions": [
+    "DeviceCapabilities",
+    "Fullscreen",
+    "Presentation",
+    "RawSockets",
+    "ScreenOrientation",
+    "Vibration"
+  ],
+  "xwalk_launch_screen": {
+    "ready_when": "custom",
+    "portrait": {
+       "background_color": "#000000",
+       "image": "logo.png 1x, logo.png 2x",
+       "image_border": "30px 40px stretch"
+     }
+  },
+  "xwalk_hosts": [
+    "http://*"
+  ]
+}
