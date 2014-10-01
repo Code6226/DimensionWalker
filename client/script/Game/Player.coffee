@@ -17,11 +17,11 @@ class Game.Player extends Phaser.Sprite
   mapWarp: (mapX, mapY) =>
     @mapX = mapX
     @mapY = mapY
-    @reset(@mapX * @width, @mapY * @height)
+    @reset(@mapX * Game.GRID_WIDTH, @mapY * Game.GRID_WIDTH)
 
   mapMove: (mapX, mapY) =>
     @mapX = mapX
     @mapY = mapY
-    @reset(@mapX * @width, @mapY * @height)
+    @reset(@mapX * Game.GRID_WIDTH, @mapY * Game.GRID_WIDTH)
 
   update: () -> # Called automatically by Phaser because we are a Sprite
