@@ -8,6 +8,14 @@ class Game.StateGame extends Phaser.State
   makeWalls: () =>
     @mapObjects = @game.add.group()
 
+    for xBundle,yIndex in @map
+      for type,xIndex in xBundle
+        if type == 1
+          console.log xIndex + ' ' + yIndex
+          new Game.Wall(@game, @, xIndex, yIndex)
+
+
+
   create: () =>
     @game.world.setBounds(0, 0, 20000, 20000)
 
@@ -26,14 +34,11 @@ class Game.StateGame extends Phaser.State
 
     @makeWalls()
 
-    ball = new Phaser.Sprite(@game, 200, 200, 'altas_main', 'ball_0')
-    @game.add.existing(ball)
-
-    @player = new Game.Player(@game, @)
+    @player = new Game.Player(@game, @, 0, 0)
     @game.camera.follow(@player)
     @game.camera.focusOnXY(0, 0)
 
-    @game.add.tween(@player).to({x: 550, 350}, 1000, Phaser.Easing.None, true)
+#    @game.add.tween(@player).to({x: 550, 350}, 1000, Phaser.Easing.None, true)
 
   update: () =>
     if @game.input.gamepad.pad1.isDown(Phaser.Gamepad.BUTTON_3) or @game.input.keyboard.isDown(Phaser.Keyboard.BACKSPACE)
