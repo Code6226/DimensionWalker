@@ -14,6 +14,15 @@ class Game.StateGame extends Phaser.State
           console.log xIndex + ' ' + yIndex
           new Game.Wall(@game, @, xIndex, yIndex)
 
+  movePlayer: (mapX, mapY) =>
+    destX = @player.mapX + mapX
+    destY = @player.mapY + mapY
+    if @isSpace(destX, destY)
+      @player.mapMove(destX, destY)
+
+  isSpace: (mapX, mapY) =>
+    @map[mapY][mapX] == 0
+
 
 
   create: () =>
@@ -39,6 +48,11 @@ class Game.StateGame extends Phaser.State
     @game.camera.focusOnXY(0, 0)
 
 #    @game.add.tween(@player).to({x: 550, 350}, 1000, Phaser.Easing.None, true)
+
+    key1 = @game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
+    key1.onDown.add(
+      () => @movePlayer(0,1)
+    );
 
   update: () =>
     if @game.input.gamepad.pad1.isDown(Phaser.Gamepad.BUTTON_3) or @game.input.keyboard.isDown(Phaser.Keyboard.BACKSPACE)
