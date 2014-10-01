@@ -25,7 +25,7 @@ class Game.Player extends Phaser.Sprite
     unless @isMoving()
       @tweenMove = @game.add.tween(@).to(
         {x: mapX * Game.GRID_WIDTH, y: mapY * Game.GRID_WIDTH}
-      , 1000, Phaser.Easing.None, true)
+      , 300, Phaser.Easing.None, true)
 
       @mapX = mapX
       @mapY = mapY

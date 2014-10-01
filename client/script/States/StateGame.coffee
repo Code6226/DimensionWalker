@@ -2,17 +2,40 @@ class Game.StateGame extends Phaser.State
   constructor: -> super
 
   textFPS: null
-
   player: null
 
-  makeWalls: () =>
-    @mapObjects = @game.add.group()
+  mapObjects: null
+  mapCurrent: null
 
-    for xBundle,yIndex in @map
+  maps: [
+    {
+      name: 'green'
+      data: [
+        [ 0, 1, 1, 0, 0 ],
+        [ 0, 1, 0, 0, 1 ],
+        [ 0, 0, 0, 1, 1 ],
+        [ 1, 1, 0, 0, 0 ],
+        [ 1, 1, 1, 1, 0 ],
+      ]
+    }
+    {
+      name: 'red'
+      data: [
+        [ 0, 0, 0, 1, 0 ],
+        [ 1, 0, 1, 1, 0 ],
+        [ 1, 0, 1, 1, 0 ],
+        [ 0, 0, 1, 0, 0 ],
+        [ 1, 0, 0, 0, 1 ],
+      ]
+    }
+  ]
+
+  makeWalls: () =>
+    for xBundle,yIndex in @maps[@mapCurrent].data
       for type,xIndex in xBundle
         if type == 1
           console.log xIndex + ' ' + yIndex
-          new Game.Wall(@game, @, xIndex, yIndex)
+          new Game.Wall(@game, @, xIndex, yIndex, @maps[@mapCurrent].name)
 
   movePlayer: (mapX, mapY) =>
     destX = @player.mapX + mapX
@@ -21,7 +44,7 @@ class Game.StateGame extends Phaser.State
       @player.mapMove(destX, destY)
 
   isSpace: (mapX, mapY) =>
-    @map[mapY]?[mapX] == 0
+    @maps[@mapCurrent].data[mapY]?[mapX] == 0
 
   create: () =>
     @game.world.setBounds(0, 0, 20000, 20000)
@@ -31,13 +54,8 @@ class Game.StateGame extends Phaser.State
     @textFPS = @add.text(120, 30, "FPS", { font: "30px Arial", fill: "rgb(1, 51, 209)", align: "center" })
     @textFPS.anchor.setTo(0.5, 0)
 
-    @map = [
-      [ 0, 1, 1, 0, 0 ],
-      [ 0, 1, 0, 0, 1 ],
-      [ 0, 0, 0, 1, 1 ],
-      [ 1, 1, 0, 0, 0 ],
-      [ 1, 1, 1, 1, 0 ],
-    ]
+    @mapObjects = @game.add.group()
+    @mapCurrent = 1
 
     @makeWalls()
 

@@ -4,8 +4,8 @@ class Game.Wall extends Phaser.Sprite
   mapX: 0
   mapY: 0
 
-  constructor: (game, gameState, mapX, mapY)->
-    super(game, 320, 340, 'wall')
+  constructor: (game, gameState, mapX, mapY, tile)->
+    super(game, 320, 340, tile)
     @anchor.setTo(0, 0) # this is the default
     @mapX = mapX
     @mapY = mapY
