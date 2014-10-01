@@ -5,6 +5,9 @@ class Game.StateGame extends Phaser.State
 
   player: null
 
+  makeWalls: () =>
+    @mapObjects = @game.add.group()
+
   create: () =>
     @game.world.setBounds(0, 0, 20000, 20000)
 
@@ -13,6 +16,15 @@ class Game.StateGame extends Phaser.State
     @textFPS = @add.text(120, 30, "FPS", { font: "30px Arial", fill: "rgb(1, 51, 209)", align: "center" })
     @textFPS.anchor.setTo(0.5, 0)
 
+    @map = [
+      [ 0, 1, 1, 0, 0 ],
+      [ 0, 1, 0, 0, 1 ],
+      [ 0, 0, 0, 1, 1 ],
+      [ 1, 1, 0, 0, 0 ],
+      [ 1, 1, 1, 1, 0 ],
+    ]
+
+    @makeWalls()
 
     ball = new Phaser.Sprite(@game, 200, 200, 'altas_main', 'ball_0')
     @game.add.existing(ball)
