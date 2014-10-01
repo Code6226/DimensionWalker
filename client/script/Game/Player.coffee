@@ -1,6 +1,8 @@
 class Game.Player extends Phaser.Sprite
 
   gameState: null
+  tweenMove: null
+
   mapX: 0
   mapY: 0
 
@@ -20,8 +22,15 @@ class Game.Player extends Phaser.Sprite
     @reset(@mapX * Game.GRID_WIDTH, @mapY * Game.GRID_WIDTH)
 
   mapMove: (mapX, mapY) =>
-    @mapX = mapX
-    @mapY = mapY
-    @reset(@mapX * Game.GRID_WIDTH, @mapY * Game.GRID_WIDTH)
+    unless @isMoving()
+      @tweenMove = @game.add.tween(@).to(
+        {x: mapX * Game.GRID_WIDTH, y: mapY * Game.GRID_WIDTH}
+      , 1000, Phaser.Easing.None, true)
+
+      @mapX = mapX
+      @mapY = mapY
+
+  isMoving: () =>
+    @tweenMove?.isRunning || false
 
   update: () -> # Called automatically by Phaser because we are a Sprite

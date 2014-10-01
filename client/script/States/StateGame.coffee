@@ -45,14 +45,13 @@ class Game.StateGame extends Phaser.State
     @game.camera.follow(@player)
     @game.camera.focusOnXY(0, 0)
 
-#    @game.add.tween(@player).to({x: 550, 350}, 1000, Phaser.Easing.None, true)
-
-    @game.input.keyboard.addKey(Phaser.Keyboard.DOWN).onDown.add(() => @movePlayer(0,1))
-    @game.input.keyboard.addKey(Phaser.Keyboard.UP).onDown.add(() => @movePlayer(0,-1))
-    @game.input.keyboard.addKey(Phaser.Keyboard.LEFT).onDown.add(() => @movePlayer(-1,0))
-    @game.input.keyboard.addKey(Phaser.Keyboard.RIGHT).onDown.add(() => @movePlayer(1,0))
-
   update: () =>
+    @movePlayer(0,1) if @game.input.keyboard.isDown(Phaser.Keyboard.DOWN)
+    @movePlayer(0,-1) if @game.input.keyboard.isDown(Phaser.Keyboard.UP)
+    @movePlayer(-1,0) if @game.input.keyboard.isDown(Phaser.Keyboard.LEFT)
+    @movePlayer(1,0) if @game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)
+
+    # quit to title
     if @game.input.gamepad.pad1.isDown(Phaser.Gamepad.BUTTON_3) or @game.input.keyboard.isDown(Phaser.Keyboard.BACKSPACE)
       @game.state.start('TitleScreen', true, false)
 
