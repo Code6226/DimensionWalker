@@ -7,6 +7,8 @@ class Game.StateGame extends Phaser.State
   mapObjects: null
   mapCurrent: null
 
+  BUTTON_HEIGHT = 100
+
   maps: [
     {
       name: 'green'
@@ -72,10 +74,34 @@ class Game.StateGame extends Phaser.State
     @game.input.keyboard.addKey(Phaser.Keyboard.TWO).onDown.add(() => @flipToMap(1))
 
   update: () =>
+    drawDebug = true
     @movePlayer(0,1) if @game.input.keyboard.isDown(Phaser.Keyboard.DOWN)
     @movePlayer(0,-1) if @game.input.keyboard.isDown(Phaser.Keyboard.UP)
     @movePlayer(-1,0) if @game.input.keyboard.isDown(Phaser.Keyboard.LEFT)
     @movePlayer(1,0) if @game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)
+
+    screenBottom = @game.height - BUTTON_HEIGHT
+    if @game.input.activePointer.isDown && @game.input.activePointer.y < screenBottom
+      screenLine1 = new Phaser.Line(0, 0, @game.width, screenBottom)
+      screenLine2 = new Phaser.Line(@game.width, 0, 0, screenBottom)
+      @game.debug.geom(screenLine1, 'rgb(0,255,0)') if drawDebug
+      @game.debug.geom(screenLine2, 'rgb(255,0,0)') if drawDebug
+
+      pointerLine = new Phaser.Line(
+        @game.input.activePointer.x, 0,
+        @game.input.activePointer.x, @game.input.activePointer.y)
+      @game.debug.geom(pointerLine, 'rgb(0,0,255)') if drawDebug
+
+      intersectTest1 = screenLine1.intersects(pointerLine) == null
+      intersectTest2 = screenLine2.intersects(pointerLine) == null
+      if intersectTest1 && intersectTest2
+        @movePlayer(0,-1) #up
+      else if intersectTest2
+        @movePlayer(-1,0) #left
+      else if intersectTest1
+        @movePlayer(1,0) #right
+      else
+        @movePlayer(0,1) #down
 
     # quit to title
     if @game.input.gamepad.pad1.isDown(Phaser.Gamepad.BUTTON_3) or @game.input.keyboard.isDown(Phaser.Keyboard.BACKSPACE)
