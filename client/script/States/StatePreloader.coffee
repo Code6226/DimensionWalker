@@ -23,6 +23,8 @@ class Game.StatePreloader extends Phaser.State
     @game.load.image('bound', Game.assetsRoot+'bound.png')
     @game.load.image('green', Game.assetsRoot+'green.png')
     @game.load.image('red', Game.assetsRoot+'red.png')
+    @game.load.image('icon_green', Game.assetsRoot+'icon_green.png')
+    @game.load.image('icon_red', Game.assetsRoot+'icon_red.png')
 
   create: ->
     tween = @add.tween(@preloadBar).to({ alpha: 0 }, 1000, Phaser.Easing.Linear.None, true)
