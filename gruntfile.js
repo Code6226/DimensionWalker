@@ -132,7 +132,7 @@ module.exports = function(grunt) {
     grunt.registerTask('lint', ['coffeelint']);
     grunt.registerTask('build', ['clean:build','copy:build','coffee:compileForWeb']);
     grunt.registerTask('dist', ['build','clean:dist','copy:dist','uglify:dist']);
-    grunt.registerTask('deploy', ['test','build','dist','gh-pages']);
+    grunt.registerTask('deploy', ['build','dist','gh-pages']);
 
     // Default task(s).
     grunt.registerTask('default', ['build','connect:server','watch']);
