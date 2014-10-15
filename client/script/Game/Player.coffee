@@ -7,7 +7,8 @@ class Game.Player extends Phaser.Sprite
   mapY: 0
 
   constructor: (game, gameState, mapX, mapY)->
-    super(game, 0, 0, 'altas_main', 'character_blue_3')
+    super(game, 0, 0, 'altas_main', 'player_1')
+    #TODO 0.5
     @anchor.setTo(0, 0) # this is the default
     @game = game
     @gameState = gameState

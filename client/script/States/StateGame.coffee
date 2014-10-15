@@ -83,7 +83,7 @@ class Game.StateGame extends Phaser.State
 
     @player = new Game.Player(@game, @, 0, 0)
     @game.camera.follow(@player)
-    @game.camera.focusOnXY(0, 0)
+#    @game.camera.focusOnXY(0, 0)
 
     #FPS
     @game.time.advancedTiming = true
