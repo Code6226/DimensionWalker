@@ -78,17 +78,18 @@ class Game.StateGame extends Phaser.State
   create: () =>
     @game.world.setBounds(0, 0, 20000, 20000)
 
-    #FPS
-    @game.time.advancedTiming = true
-    @textFPS = @add.text(520, 30, "FPS", { font: "30px Arial", fill: "rgb(1, 51, 209)", align: "center" })
-    @textFPS.anchor.setTo(0.5, 0)
-
     @mapObjects = @game.add.group()
     @flipToMap(1)
 
     @player = new Game.Player(@game, @, 0, 0)
     @game.camera.follow(@player)
     @game.camera.focusOnXY(0, 0)
+
+    #FPS
+    @game.time.advancedTiming = true
+    @textFPS = @add.text(520, 30, "FPS", { font: "30px Arial", fill: "rgb(1, 51, 209)", align: "center" })
+    @textFPS.fixedToCamera = true
+    @textFPS.anchor.setTo(0.5, 0)
 
     dimPicker = new Game.DimensionPicker(@game, @flipToMap)
     dimPicker.load(@maps)
