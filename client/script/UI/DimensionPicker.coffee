@@ -19,6 +19,7 @@ class Game.DimensionPicker
 
     _.each(@dimNames, (name, i) =>
       button = @game.add.sprite( 50+ 120 * i, Game.HEIGHT - 100, 'icon_'+name)
+      button.fixedToCamera = true
       button.inputEnabled = true
       button.events.onInputUp.add(() => @pickedCallback(i))
       @pickerButtons.add(button)
