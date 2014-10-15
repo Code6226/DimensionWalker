@@ -23,5 +23,5 @@ class Game.StateTitleScreen extends Phaser.State
     @game.state.start('Game', true, false)
 
   update: () =>
-    if @game.input.gamepad.pad1.isDown(Phaser.Gamepad.BUTTON_0) or @game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)
+    if @game.input.gamepad.pad1.isDown(Phaser.Gamepad.BUTTON_0) or@game.input.activePointer.isDown or @game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)
       @goPlay()
