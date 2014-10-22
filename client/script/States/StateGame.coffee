@@ -5,81 +5,127 @@ class Game.StateGame extends Phaser.State
   player: null
 
   mapObjects: null
-  mapCurrent: null
+  mapCurrentDim: null
+  mapCurrentLev: null
 
   BUTTON_HEIGHT = 100
 
-  maps: [
+  levels: [
     {
-      name: 'green'
-      data: [
-        [ 0, 1, 1, 0, 0 ],
-        [ 0, 1, 0, 0, 1 ],
-        [ 0, 0, 0, 1, 1 ],
-        [ 1, 1, 0, 0, 0 ],
-        [ 1, 1, 1, 1, 0 ],
+      level: 1
+      dimensions: [
+        {
+          name: 'red'
+          data: [
+            [ 0, 1, 1, 0, 0 ],
+            [ 0, 1, 0, 0, 1 ],
+            [ 0, 0, 0, 1, 1 ],
+            [ 1, 1, 0, 0, 0 ],
+            [ 1, 1, 1, 1, 2 ],
+          ]
+        },
+        {
+          name: 'green'
+          data: [
+            [ 0, 1, 1, 0, 0 ],
+            [ 0, 1, 0, 0, 1 ],
+            [ 0, 0, 0, 1, 1 ],
+            [ 1, 1, 0, 0, 0 ],
+            [ 1, 1, 1, 1, 0 ],
+          ]
+        }
       ]
     }
     {
-      name: 'red'
-      data: [
-        [ 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
-        [ 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
-        [ 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
-        [ 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
-        [ 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
-        [ 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
-        [ 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
-        [ 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
-        [ 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
-        [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
-        [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
-        [ 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
-        [ 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
-        [ 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
-        [ 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
-        [ 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
-        [ 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
-        [ 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1 ],
-        [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1 ],
-        [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1 ],
-        [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1 ],
-        [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1 ],
-        [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1 ],
-        [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1 ],
-        [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0 ],
+      level: 2
+      dimensions: [
+        {
+          name: 'green'
+          data: [
+            [ 0, 1, 1, 0, 0 ],
+            [ 0, 1, 0, 0, 1 ],
+            [ 0, 0, 0, 1, 1 ],
+            [ 1, 1, 0, 0, 0 ],
+            [ 1, 1, 1, 1, 0 ],
+          ]
+        },
+        {
+          name: 'red'
+          data: [
+            [ 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
+            [ 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
+            [ 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
+            [ 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
+            [ 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
+            [ 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
+            [ 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
+            [ 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
+            [ 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
+            [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
+            [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
+            [ 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
+            [ 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
+            [ 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
+            [ 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
+            [ 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
+            [ 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
+            [ 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1 ],
+            [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1 ],
+            [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1 ],
+            [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1 ],
+            [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1 ],
+            [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1 ],
+            [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1 ],
+            [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0 ],
+          ]
+        }
       ]
     }
   ]
 
-  flipToMap: (mapIndex) =>
-    @mapCurrent = mapIndex
+  flipToNextLev: =>
+    if @mapCurrentLev == null
+      @mapCurrentLev = 0
+    else
+      @mapCurrentLev += 1
+      @flipToDim(0)
 
+
+  flipToDim: (mapIndex) =>
+    @mapCurrentDim = mapIndex
     # remove and destroy all walls
     @mapObjects.removeAll(true)
 
-    for xBundle,yIndex in @maps[@mapCurrent].data
+    for xBundle,yIndex in @levels[@mapCurrentLev].dimensions[@mapCurrentDim].data
       for type,xIndex in xBundle
         if type == 1
 #          console.log xIndex + ' ' + yIndex
-          wall = new Game.Wall(@game, @, xIndex, yIndex, @maps[@mapCurrent].name)
+          wall = new Game.Wall(@game, @, xIndex, yIndex, @levels[@mapCurrentLev].dimensions[@mapCurrentDim].name)
           @mapObjects.add(wall)
 
   movePlayer: (mapX, mapY) =>
     if @isSpace(@player.mapX, @player.mapY)
       destX = @player.mapX + mapX
       destY = @player.mapY + mapY
-      if @isSpace(destX, destY)
+
+      if @isGoal(destX, destY)
+        @player.mapWarp(0,0)
+        @flipToNextLev()
+      else if @isSpace(destX, destY)
         @player.mapMove(destX, destY)
 
+  isGoal: (mapX, mapY) =>
+    @levels[@mapCurrentLev].dimensions[@mapCurrentDim].data[mapY]?[mapX] == 2
+
   isSpace: (mapX, mapY) =>
-    @maps[@mapCurrent].data[mapY]?[mapX] == 0
+    @levels[@mapCurrentLev].dimensions[@mapCurrentDim].data[mapY]?[mapX] == 0
 
   create: () =>
     @game.world.setBounds(0, 0, 20000, 20000)
 
     @mapObjects = @game.add.group()
-    @flipToMap(1)
+    @flipToNextLev()
+    @flipToDim(0)
 
     @player = new Game.Player(@game, @, 0, 0)
     @game.camera.follow(@player)
@@ -91,11 +137,11 @@ class Game.StateGame extends Phaser.State
     @textFPS.fixedToCamera = true
     @textFPS.anchor.setTo(0.5, 0)
 
-    dimPicker = new Game.DimensionPicker(@game, @flipToMap)
-    dimPicker.load(@maps)
+    dimPicker = new Game.DimensionPicker(@game, @flipToDim)
+    dimPicker.load(@levels[@mapCurrentLev].dimensions)
 
-    @game.input.keyboard.addKey(Phaser.Keyboard.ONE).onDown.add(() => @flipToMap(0))
-    @game.input.keyboard.addKey(Phaser.Keyboard.TWO).onDown.add(() => @flipToMap(1))
+    @game.input.keyboard.addKey(Phaser.Keyboard.ONE).onDown.add(() => @flipToDim(0))
+    @game.input.keyboard.addKey(Phaser.Keyboard.TWO).onDown.add(() => @flipToDim(1))
 
 
     @screenBottom = @game.height - BUTTON_HEIGHT
