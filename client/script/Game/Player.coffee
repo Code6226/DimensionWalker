@@ -8,8 +8,7 @@ class Game.Player extends Phaser.Sprite
 
   constructor: (game, gameState, mapX, mapY)->
     super(game, 0, 0, 'altas_main', 'player_1')
-    #TODO 0.5
-    @anchor.setTo(0, 0) # this is the default
+    @anchor.setTo(0.5, 0.5) # this is the default
     @game = game
     @gameState = gameState
 
@@ -20,13 +19,19 @@ class Game.Player extends Phaser.Sprite
   mapWarp: (mapX, mapY) =>
     @mapX = mapX
     @mapY = mapY
-    @reset(@mapX * Game.GRID_WIDTH, @mapY * Game.GRID_WIDTH)
+    @reset(@mapX * Game.GRID_WIDTH + Game.GRID_WIDTH_HALF, @mapY * Game.GRID_WIDTH + Game.GRID_WIDTH_HALF)
 
   mapMove: (mapX, mapY) =>
     unless @isMoving()
-      @tweenMove = @game.add.tween(@).to(
-        {x: mapX * Game.GRID_WIDTH, y: mapY * Game.GRID_WIDTH}
-      , 300, Phaser.Easing.None, true)
+      @angle = 90 if mapX > @mapX
+      @angle = 180 if mapY > @mapY
+      @angle = 270 if mapX < @mapX
+      @angle = 0 if mapY < @mapY
+
+      @tweenMove = @game.add.tween(@).to({
+        x: mapX * Game.GRID_WIDTH + Game.GRID_WIDTH_HALF
+        y: mapY * Game.GRID_WIDTH + Game.GRID_WIDTH_HALF
+      }, 300, Phaser.Easing.None, true)
 
       @mapX = mapX
       @mapY = mapY

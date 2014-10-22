@@ -4,6 +4,8 @@ window.Game = {
   HEIGHT: 540 #1080 /2
 
   GRID_WIDTH: 198 #1080 /2
+  GRID_WIDTH_HALF: 99 # GRID_WIDTH /2
+
   nPlayers: 1 #1080 /2
   showDebugBodies: false
 
