@@ -139,10 +139,7 @@ class Game.StateGame extends Phaser.State
       destX = @player.mapX + mapX
       destY = @player.mapY + mapY
 
-      if @isGoal(destX, destY)
-        @player.mapWarp(0,0)
-        @flipToNextLev()
-      else if @isSpace(destX, destY)
+      if @isSpace(destX, destY) || @isGoal(destX, destY)
         @player.mapMove(destX, destY)
 
   isGoal: (mapX, mapY) =>
@@ -206,6 +203,10 @@ class Game.StateGame extends Phaser.State
     # quit to title
     if @game.input.gamepad.pad1.isDown(Phaser.Gamepad.BUTTON_3) or @game.input.keyboard.isDown(Phaser.Keyboard.BACKSPACE)
       @game.state.start('TitleScreen', true, false)
+
+    if @isGoal(@player.mapX, @player.mapY) && !@player.isMoving()
+      @player.mapWarp(0,0)
+      @flipToNextLev()
 
 
   render: () =>
