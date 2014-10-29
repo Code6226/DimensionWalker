@@ -23,16 +23,6 @@ class Game.StateGame extends Phaser.State
             [ 1, 1, 0, 0, 0 ],
             [ 1, 1, 1, 1, 2 ],
           ]
-        },
-        {
-          name: 'green'
-          data: [
-            [ 0, 1, 1, 0, 0 ],
-            [ 0, 1, 0, 0, 1 ],
-            [ 0, 0, 0, 1, 1 ],
-            [ 1, 1, 0, 0, 0 ],
-            [ 1, 1, 1, 1, 0 ],
-          ]
         }
       ]
     }
@@ -95,6 +85,16 @@ class Game.StateGame extends Phaser.State
           ]
         },
         {
+          name: 'green'
+          data: [
+            [ 0, 1, 1, 0, 0 ],
+            [ 0, 1, 0, 0, 1 ],
+            [ 0, 0, 0, 1, 1 ],
+            [ 1, 1, 0, 0, 0 ],
+            [ 1, 1, 1, 1, 2 ],
+          ]
+        }
+        {
           name: 'red'
           data: [
             [ 0, 1, 1, 0, 0 ],
@@ -108,6 +108,10 @@ class Game.StateGame extends Phaser.State
     }
   ]
 
+  loadDimensionPicker: =>
+    dimPicker = new Game.DimensionPicker(@game, @flipToDim)
+    dimPicker.load(@levels[@mapCurrentLev].dimensions)
+
   flipToNextLev: =>
     if @mapCurrentLev == null
       @mapCurrentLev = 0
@@ -116,6 +120,7 @@ class Game.StateGame extends Phaser.State
 
     if @levels[@mapCurrentLev]?
       @flipToDim(0)
+      @loadDimensionPicker()
     else
       @mapCurrentLev = null
       @mapCurrentDim = 0
@@ -157,7 +162,7 @@ class Game.StateGame extends Phaser.State
     @flipToNextLev()
     @flipToDim(0)
 
-    @player = new Game.Player(@game, @, 0, 0)
+    @player = new Game.Player(@game, @, 2, 2)
     @game.camera.follow(@player)
 #    @game.camera.focusOnXY(0, 0)
 
@@ -167,8 +172,7 @@ class Game.StateGame extends Phaser.State
     @textFPS.fixedToCamera = true
     @textFPS.anchor.setTo(0.5, 0)
 
-    dimPicker = new Game.DimensionPicker(@game, @flipToDim)
-    dimPicker.load(@levels[@mapCurrentLev].dimensions)
+    @loadDimensionPicker()
 
     @game.input.keyboard.addKey(Phaser.Keyboard.ONE).onDown.add(() => @flipToDim(0))
     @game.input.keyboard.addKey(Phaser.Keyboard.TWO).onDown.add(() => @flipToDim(1))
