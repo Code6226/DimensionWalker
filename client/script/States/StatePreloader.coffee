@@ -20,6 +20,7 @@ class Game.StatePreloader extends Phaser.State
     @game.load.image('Button', Game.assetsRoot+'Button.png')
     @game.load.image('bound', Game.assetsRoot+'bound.png')
     @game.load.image('green', Game.assetsRoot+'green.png')
+    @game.load.image('goal', Game.assetsRoot+'goal.png')
     @game.load.image('red', Game.assetsRoot+'red.png')
     @game.load.image('icon_green', Game.assetsRoot+'icon_green.png')
     @game.load.image('icon_red', Game.assetsRoot+'icon_red.png')
