@@ -130,8 +130,10 @@ class Game.StateGame extends Phaser.State
     for xBundle,yIndex in @levels[@mapCurrentLev].dimensions[@mapCurrentDim].data
       for type,xIndex in xBundle
         if type == 1
-#          console.log xIndex + ' ' + yIndex
           wall = new Game.Wall(@game, @, xIndex, yIndex, @levels[@mapCurrentLev].dimensions[@mapCurrentDim].name)
+          @mapObjects.add(wall)
+        else if type == 2
+          wall = new Game.Wall(@game, @, xIndex, yIndex, 'goal')
           @mapObjects.add(wall)
 
   movePlayer: (mapX, mapY) =>
