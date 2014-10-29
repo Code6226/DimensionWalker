@@ -91,11 +91,11 @@ class Game.StateGame extends Phaser.State
             [ 0, 1, 0, 0, 1 ],
             [ 0, 0, 0, 1, 1 ],
             [ 1, 1, 0, 0, 0 ],
-            [ 1, 1, 1, 1, 2 ],
+            [ 1, 1, 1, 1, 1 ],
           ]
         }
         {
-          name: 'red'
+          name: 'blue'
           data: [
             [ 0, 1, 1, 0, 0 ],
             [ 0, 1, 0, 0, 1 ],
