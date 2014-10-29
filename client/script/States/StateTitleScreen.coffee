@@ -10,11 +10,11 @@ class Game.StateTitleScreen extends Phaser.State
 
 
     stylePressButton = { font: "20px Arial", fill: "#12D523", align: "center" }
-    textPressButton = @add.text(@world.centerX, @world.centerY, "Play Game!", stylePressButton)
+    textPressButton = @add.text(Game.WIDTH/2, Game.HEIGHT/2, "Play Game!", stylePressButton)
     textPressButton.anchor.setTo(0.5, 0.5)
 
     styleCopyright = { font: "20px Arial", fill: "#E2D533", align: "center" }
-    textCopyright = @add.text(@world.centerX, Game.HEIGHT - 50, "(c) 2014 Cool dudes", styleCopyright)
+    textCopyright = @add.text(Game.WIDTH/2, Game.HEIGHT - 50, "(c) 2014 Cool dudes", styleCopyright)
     textCopyright.anchor.setTo(0.5, 1)
 
 #    @buttonSingle = new Game.Button(@game, @world.centerX - 110, @world.centerY - 35, 'Single Player', 'Button', @goTakeTurn, @, 220)
@@ -23,5 +23,6 @@ class Game.StateTitleScreen extends Phaser.State
     @game.state.start('Game', true, false)
 
   update: () =>
+    @game.camera.reset()
     if @game.input.gamepad.pad1.isDown(Phaser.Gamepad.BUTTON_0) or@game.input.activePointer.isDown or @game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)
       @goPlay()

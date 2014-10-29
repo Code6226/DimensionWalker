@@ -46,7 +46,7 @@ class Game.StateGame extends Phaser.State
             [ 0, 1, 0, 0, 1 ],
             [ 0, 0, 0, 1, 1 ],
             [ 1, 1, 0, 0, 0 ],
-            [ 1, 1, 1, 1, 0 ],
+            [ 1, 1, 1, 1, 2 ],
           ]
         },
         {
@@ -81,6 +81,31 @@ class Game.StateGame extends Phaser.State
         }
       ]
     }
+    {
+      level: 3
+      dimensions: [
+        {
+          name: 'red'
+          data: [
+            [ 0, 1, 1, 1, 1 ],
+            [ 0, 1, 1, 1, 1 ],
+            [ 0, 2, 1, 1, 1 ],
+            [ 1, 1, 1, 1, 1 ],
+            [ 1, 1, 1, 1, 1 ],
+          ]
+        },
+        {
+          name: 'red'
+          data: [
+            [ 0, 1, 1, 0, 0 ],
+            [ 0, 1, 0, 0, 1 ],
+            [ 0, 0, 0, 1, 1 ],
+            [ 1, 1, 0, 0, 0 ],
+            [ 1, 1, 1, 1, 2 ],
+          ]
+        }
+      ]
+    }
   ]
 
   flipToNextLev: =>
@@ -88,7 +113,13 @@ class Game.StateGame extends Phaser.State
       @mapCurrentLev = 0
     else
       @mapCurrentLev += 1
+
+    if @levels[@mapCurrentLev]?
       @flipToDim(0)
+    else
+      @mapCurrentLev = null
+      @mapCurrentDim = 0
+      @game.state.start('Win', true, false)
 
 
   flipToDim: (mapIndex) =>

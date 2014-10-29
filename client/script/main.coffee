@@ -6,6 +6,7 @@ class Game.Main
     @game.state.add('Preloader', new Game.StatePreloader, false)
     @game.state.add('TitleScreen', new Game.StateTitleScreen, false)
     @game.state.add('Game', new Game.StateGame, false)
+    @game.state.add('Win', new Game.StateWinScreen, false)
 
     @game.state.start('Boot')
 
