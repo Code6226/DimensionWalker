@@ -13,7 +13,7 @@ module.exports = function(grunt) {
                     {src: ['client/index.html'], dest: 'build/index.html'},
                     {src: ['client/icon.png'], dest: 'build/icon.png'},
                     {src: ['client/logo.png'], dest: 'build/logo.png'},
-                    {src: ['client/manifest8.json'], dest: 'build/manifest8.json'},
+                    {src: ['client/manifest.json'], dest: 'build/manifest.json'},
                     {src: 'client/lib/*', dest: 'build/lib/', expand: true, flatten: true},
                     {src: 'assets/output/*', dest: 'build/assets/', expand: true, flatten: true}
                 ]
