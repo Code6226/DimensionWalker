@@ -15,10 +15,10 @@ class Game.StateGame extends Phaser.State
       level: 1
       dimensions: [
         {
-          name: 'red'
+          name: 'green'
           data: [
             [ 0, 1, 1, 0, 0 ],
-            [ 0, 1, 0, 0, 1 ],
+            [ 0, 1, 1, 0, 1 ],
             [ 0, 0, 0, 1, 1 ],
             [ 1, 1, 0, 0, 0 ],
             [ 1, 1, 1, 1, 2 ],
@@ -134,8 +134,16 @@ class Game.StateGame extends Phaser.State
 
     for xBundle,yIndex in @levels[@mapCurrentLev].dimensions[@mapCurrentDim].data
       for type,xIndex in xBundle
-        if type == 1
-          wall = new Game.Wall(@game, @, xIndex, yIndex, @levels[@mapCurrentLev].dimensions[@mapCurrentDim].name)
+        if type == 0
+          openSpaces = ''
+          openSpaces += 'u' if not @isWallish(xIndex,yIndex - 1)
+          openSpaces += 'd' if not @isWallish(xIndex,yIndex + 1)
+          openSpaces += 'l' if not @isWallish(xIndex - 1, yIndex)
+          openSpaces += 'r' if not @isWallish(xIndex + 1, yIndex)
+          wall = new Game.Wall(@game, @, xIndex, yIndex, @levels[@mapCurrentLev].dimensions[@mapCurrentDim].name + '_space_' + openSpaces + '0')
+          @mapObjects.add(wall)
+        else if type == 1
+          wall = new Game.Wall(@game, @, xIndex, yIndex, @levels[@mapCurrentLev].dimensions[@mapCurrentDim].name + '_wall0')
           @mapObjects.add(wall)
         else if type == 2
           wall = new Game.Wall(@game, @, xIndex, yIndex, 'goal')
@@ -151,6 +159,13 @@ class Game.StateGame extends Phaser.State
 
   isGoal: (mapX, mapY) =>
     @levels[@mapCurrentLev].dimensions[@mapCurrentDim].data[mapY]?[mapX] == 2
+
+  isWallish: (mapX, mapY) =>
+    type = @levels[@mapCurrentLev].dimensions[@mapCurrentDim].data[mapY]?[mapX]
+    if not type? or type == 1
+      return true
+    else
+      return false
 
   isSpace: (mapX, mapY) =>
     @levels[@mapCurrentLev].dimensions[@mapCurrentDim].data[mapY]?[mapX] == 0
