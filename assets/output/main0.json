@@ -1,26 +1,35 @@
 {"frames": [
 
 {
-	"filename": "character_blue_0",
-	"frame": {"x":48,"y":976,"w":46,"h":40},
+	"filename": "blue",
+	"frame": {"x":0,"y":0,"w":198,"h":198},
 	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":1,"y":4,"w":46,"h":40},
-	"sourceSize": {"w":48,"h":48},
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":198,"h":198},
+	"sourceSize": {"w":198,"h":198},
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "character_red_0",
-	"frame": {"x":0,"y":976,"w":48,"h":40},
+	"filename": "goal",
+	"frame": {"x":198,"y":0,"w":198,"h":198},
 	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":4,"w":48,"h":40},
-	"sourceSize": {"w":48,"h":48},
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":198,"h":198},
+	"sourceSize": {"w":198,"h":198},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "green",
+	"frame": {"x":0,"y":198,"w":198,"h":198},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":198,"h":198},
+	"sourceSize": {"w":198,"h":198},
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
 	"filename": "player_1",
-	"frame": {"x":0,"y":0,"w":107,"h":198},
+	"frame": {"x":396,"y":0,"w":107,"h":198},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":44,"y":0,"w":107,"h":198},
@@ -38,7 +47,7 @@
 },
 {
 	"filename": "player_3",
-	"frame": {"x":0,"y":590,"w":107,"h":192},
+	"frame": {"x":0,"y":784,"w":107,"h":192},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":44,"y":0,"w":107,"h":192},
@@ -47,7 +56,7 @@
 },
 {
 	"filename": "player_4",
-	"frame": {"x":0,"y":782,"w":106,"h":194},
+	"frame": {"x":0,"y":590,"w":106,"h":194},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":45,"y":0,"w":106,"h":194},
@@ -56,10 +65,19 @@
 },
 {
 	"filename": "player_5",
-	"frame": {"x":0,"y":198,"w":107,"h":198},
+	"frame": {"x":396,"y":198,"w":107,"h":198},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":44,"y":0,"w":107,"h":198},
+	"sourceSize": {"w":198,"h":198},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "red",
+	"frame": {"x":198,"y":198,"w":198,"h":198},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":198,"h":198},
 	"sourceSize": {"w":198,"h":198},
 	"pivot": {"x":0.5,"y":0.5}
 }],
@@ -68,8 +86,8 @@
 	"version": "1.0",
 	"image": "main0.png",
 	"format": "RGBA8888",
-	"size": {"w":128,"h":1024},
+	"size": {"w":512,"h":1024},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:959a89ff6d6007d64ab8a2dc1708092e:cfe9548edb3558d8f9e39e3606712b76:4eca5c461cff569e73cb53b7a0addea8$"
+	"smartupdate": "$TexturePacker:SmartUpdate:4b0b8771d15b91f928135fd41ab47e56:8d6e7b1eed1043199662d179efb6d226:4eca5c461cff569e73cb53b7a0addea8$"
 }
 }

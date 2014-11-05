@@ -15,14 +15,7 @@ class Game.StatePreloader extends Phaser.State
     #  Load our actual games assets
     @game.load.atlas('altas_main', Game.assetsRoot+'main0.png', Game.assetsRoot+'main0.json')
 
-    @game.load.image('title', Game.assetsRoot+'title.png')
-
     @game.load.image('Button', Game.assetsRoot+'Button.png')
-    @game.load.image('bound', Game.assetsRoot+'bound.png')
-    @game.load.image('goal', Game.assetsRoot+'goal.png')
-    @game.load.image('green', Game.assetsRoot+'green.png')
-    @game.load.image('blue', Game.assetsRoot+'blue.png')
-    @game.load.image('red', Game.assetsRoot+'red.png')
     @game.load.image('icon_green', Game.assetsRoot+'icon_green.png')
     @game.load.image('icon_blue', Game.assetsRoot+'icon_blue.png')
     @game.load.image('icon_red', Game.assetsRoot+'icon_red.png')

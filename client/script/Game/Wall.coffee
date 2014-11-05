@@ -5,7 +5,7 @@ class Game.Wall extends Phaser.Sprite
   mapY: 0
 
   constructor: (game, gameState, mapX, mapY, tile)->
-    super(game, 0, 0, tile)
+    super(game, 0, 0, 'altas_main', tile)
     @anchor.setTo(0, 0) # this is the default
     @mapX = mapX
     @mapY = mapY
